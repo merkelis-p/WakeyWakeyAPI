@@ -76,7 +76,6 @@ namespace WakeyWakeyAPI.Controllers
         public async Task<ActionResult<User>> PostUser(User user)
         {
             using var hmac = new HMACSHA512();
-
             user.Salt = Convert.ToBase64String(hmac.Key);
             user.Password = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(user.Password)));
 
@@ -86,8 +85,29 @@ namespace WakeyWakeyAPI.Controllers
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
+        // POST: api/Users/Login
+        [HttpPost("Login")]
+        public async Task<ActionResult<LoginValidationResult>> ValidateLogin(UserLoginRequest loginRequest)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == loginRequest.Username);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            using var hmac = new HMACSHA512(Convert.FromBase64String(user.Salt));
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginRequest.Password));
+
+            return new LoginValidationResult 
+            {
+                IsValid = computedHash.SequenceEqual(Convert.FromBase64String(user.Password)),
+                UserId = user.Id
+            };
+        }
+
+
     
-        
+
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
