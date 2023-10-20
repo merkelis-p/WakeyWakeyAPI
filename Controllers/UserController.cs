@@ -9,20 +9,19 @@ using WakeyWakeyAPI.Repositories;
 
 namespace WakeyWakeyAPI.Controllers
 {
-
     public class UserController : GenericController<User, UserRepository>
     {
-        readonly UserRepository _repository;
+        readonly UserRepository _context;
         public UserController(UserRepository repository) : base(repository)
         {
-            _repository = repository;
+            _context = repository;
         }
 
         // POST: api/Users/Login
         [HttpPost("Login")]
         public async Task<ActionResult<LoginValidationResult>> ValidateLogin(UserLoginRequest loginRequest)
         {
-            var user = await _repository.GetByUsernameAsync(loginRequest.Username);
+            var user = await _context.GetByUsernameAsync(loginRequest.Username);
             if (user == null)
             {
                 return NotFound();
