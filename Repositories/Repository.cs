@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using WakeyWakeyAPI.Models;
 
 
-namespace WakeyWakeyAPI.Controllers
+namespace WakeyWakeyAPI.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace WakeyWakeyAPI.Controllers
+namespace WakeyWakeyAPI.Repositories
 {
     public interface IRepository<T> where T : class
     {

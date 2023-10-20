@@ -5,23 +5,24 @@ using Microsoft.AspNetCore.Mvc;
 using WakeyWakeyAPI.Models;
 using System.Security.Cryptography;
 using System.Text;
-
+using WakeyWakeyAPI.Repositories;
 
 namespace WakeyWakeyAPI.Controllers
 {
 
-    public class UsersController : GenericController<User, UserRepository>
+    public class UserController : GenericController<User, UserRepository>
     {
-        public UsersController(UserRepository repository) : base(repository)
+        readonly UserRepository _repository;
+        public UserController(UserRepository repository) : base(repository)
         {
-            
+            _repository = repository;
         }
 
         // POST: api/Users/Login
         [HttpPost("Login")]
         public async Task<ActionResult<LoginValidationResult>> ValidateLogin(UserLoginRequest loginRequest)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == loginRequest.Username);
+            var user = await _repository.GetByUsernameAsync(loginRequest.Username);
             if (user == null)
             {
                 return NotFound();
@@ -36,6 +37,7 @@ namespace WakeyWakeyAPI.Controllers
                 UserId = user.Id
             };
         }
+
         
     }
 }

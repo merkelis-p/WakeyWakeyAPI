@@ -1,16 +1,14 @@
 using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using WakeyWakeyAPI.Models;
-
 using WakeyWakeyAPI.Controllers;
+using WakeyWakeyAPI.Repositories;
 
 namespace WakeyWakeyAPI
 {
@@ -46,7 +44,13 @@ namespace WakeyWakeyAPI
             });
             
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped<UsersController>();
+            services.AddScoped<UserController>();
+            services.AddScoped<EventController>();
+            services.AddScoped<ReminderController>();
+            services.AddScoped<CourseController>();
+            services.AddScoped<SubjectController>();
+            services.AddScoped<TaskController>();
+            services.AddScoped<RecordController>();
 
         }
 
