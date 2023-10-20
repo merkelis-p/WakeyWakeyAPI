@@ -28,9 +28,40 @@ namespace WakeyWakeyAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WakeyWakeyAPI", Version = "v1" });
             });
 
+            
+            services.AddControllers();
+
             services.AddDbContextPool<wakeyContext>(options => options
                 .UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 21)))
             );
+
+                        
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(GenericController<,>), typeof(GenericController<,>));
+            services.AddScoped(typeof(UserRepository), typeof(UserRepository));
+            services.AddScoped(typeof(UserController), typeof(UserController));
+            services.AddScoped(typeof(EventRepository), typeof(EventRepository));
+            services.AddScoped(typeof(EventController), typeof(EventController));
+            services.AddScoped(typeof(ReminderRepository), typeof(ReminderRepository));
+            services.AddScoped(typeof(ReminderController), typeof(ReminderController));
+            services.AddScoped(typeof(CourseRepository), typeof(CourseRepository));
+            services.AddScoped(typeof(CourseController), typeof(CourseController));
+            services.AddScoped(typeof(SubjectRepository), typeof(SubjectRepository));
+            services.AddScoped(typeof(SubjectController), typeof(SubjectController));
+            services.AddScoped(typeof(TaskRepository), typeof(TaskRepository));
+            services.AddScoped(typeof(TaskController), typeof(TaskController));
+            services.AddScoped(typeof(RecordRepository), typeof(RecordRepository));
+            services.AddScoped(typeof(RecordController), typeof(RecordController));
+
+    
+            //services.AddScoped<UserController>();
+            // services.AddScoped<EventController>();
+            // services.AddScoped<ReminderController>();
+            // services.AddScoped<CourseController>();
+            // services.AddScoped<SubjectController>();
+            // services.AddScoped<TaskController>();
+            // services.AddScoped<RecordController>();
+
 
             services.AddCors(options =>
             {
@@ -39,15 +70,6 @@ namespace WakeyWakeyAPI
                                     .AllowAnyMethod()
                                     .AllowAnyHeader());
             });
-            
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped<UserController>();
-            services.AddScoped<EventController>();
-            services.AddScoped<ReminderController>();
-            services.AddScoped<CourseController>();
-            services.AddScoped<SubjectController>();
-            services.AddScoped<TaskController>();
-            services.AddScoped<RecordController>();
 
         }
 
