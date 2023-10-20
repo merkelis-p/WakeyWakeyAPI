@@ -8,8 +8,7 @@ namespace WakeyWakeyAPI.Models
 {
     public partial class wakeyContext : DbContext
     {
-
-
+        
         public wakeyContext(DbContextOptions<wakeyContext> options)
             : base(options)
         {
@@ -22,15 +21,7 @@ namespace WakeyWakeyAPI.Models
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<Task> Tasks { get; set; }
         public virtual DbSet<User> Users { get; set; }
-
-//         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//         {
-//             if (!optionsBuilder.IsConfigured)
-//             {
-//                 optionsBuilder.UseMySql("server=localhost;database=wakey;user id=root;password=vilniausuniversitetas1", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.3.39-mariadb"));
-//             }
-//         }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasCharSet("utf8mb4")
