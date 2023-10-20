@@ -6,6 +6,7 @@ namespace WakeyWakeyAPI.Repositories
     {
         public EventRepository(wakeyContext context) : base(context)
         {
+            
         } 
     }
 }

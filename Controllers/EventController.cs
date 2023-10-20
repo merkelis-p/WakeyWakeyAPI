@@ -3,11 +3,11 @@ using WakeyWakeyAPI.Repositories;
 
 namespace WakeyWakeyAPI.Controllers
 {
-
-    public class EventController : Repository<Event>
+    public class EventController : GenericController<Event, EventRepository>
     {
-        public EventController(wakeyContext context) : base(context)
+        public EventController(EventRepository context) : base(context)
         {
+            
         }
     }
 
