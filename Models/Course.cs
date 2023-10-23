@@ -17,10 +17,14 @@ namespace WakeyWakeyAPI.Models {
             [MaxLength(5000)]
             public string? Description { get; set; }
 
-            public DateTime? StartDate { get; set; }
-            public DateTime? EndDate { get; set; }
+            [Required]
+            public DateTime StartDate { get; set; }
+            
+            [Required]
+            public DateTime EndDate { get; set; }
 
-            public int? Status { get; set; }
+            [Required]
+            public int Status { get; set; }
             public int? Score { get; set; }
 
             [ForeignKey("User")]
