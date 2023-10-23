@@ -49,12 +49,18 @@ namespace WakeyWakeyAPI.Repositories
             _logger.LogInformation($"Starting update for the {typeof(T).Name} entity.");
             _logger.LogInformation($"Entity Data: {JsonSerializer.Serialize(entity)}");
 
+            // Detach all entities in the ChangeTracker to ensure no conflicts
+            foreach (var entityInContext in _context.ChangeTracker.Entries())
+            {
+                entityInContext.State = EntityState.Detached;
+            }
+    
             _entities.Update(entity);
             _context.SaveChanges();
 
             _logger.LogInformation($"{typeof(T).Name} entity successfully updated.");
         }
-
+        
         public async System.Threading.Tasks.Task DeleteAsync(int id)
         {
             T entity = await _entities.FindAsync(id);
