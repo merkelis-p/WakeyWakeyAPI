@@ -14,20 +14,22 @@ namespace WakeyWakeyAPI.Models {
         public int Category { get; set; }
         public int? ParentId { get; set; }
 
+
         [ForeignKey("Subject")]
         public int? SubjectId { get; set; }
-        public virtual Subject Subject { get; set; }
+        public virtual Subject? Subject { get; set; }
 
+        [Required]
         [ForeignKey("User")]
         public int UserId { get; set; }
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
 
         [Required]
         [MaxLength(255)]
         public string Name { get; set; }
 
         [MaxLength(5000)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public int? EstimatedDuration { get; set; }
         public int? OverallDuration { get; set; }
@@ -38,7 +40,7 @@ namespace WakeyWakeyAPI.Models {
         [Required]
         public int Status { get; set; }
 
-        public virtual ICollection<Record> Records { get; set; }
+        public virtual ICollection<Record>? Records { get; set; }
     }
 
 }
