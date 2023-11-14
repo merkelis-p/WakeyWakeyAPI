@@ -13,6 +13,19 @@ namespace WakeyWakeyAPI.Controllers
         {
             _context = context;
         }
+        
+        // Get by user id
+        [HttpGet("GetByUserId/{id}")]
+        public async Task<ActionResult<Course>> GetByUserId(int id)
+        {
+            var course = await _context.GetByUserIdAsync(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return course;
+        }
 
     }
 }

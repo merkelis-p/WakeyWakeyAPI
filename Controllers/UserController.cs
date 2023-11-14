@@ -36,6 +36,30 @@ namespace WakeyWakeyAPI.Controllers
                 UserId = user.Id
             };
         }
+        
+        
+        // POST: api/Users/Register
+        [HttpPost("Register")]
+        public async Task<ActionResult<User>> Register(UserRegisterRequest registerRequest)
+        {
+            if (await _context.ExistsAsync(registerRequest.Username) ||
+                await _context.ExistsEmailAsync(registerRequest.Email))
+            {
+                return BadRequest("Username or email already exists.");
+            }
+
+            using var hmac = new HMACSHA512();
+            var user = new User
+            {
+                Username = registerRequest.Username,
+                Salt = Convert.ToBase64String(hmac.Key),
+                Password = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(registerRequest.Password)))
+            };
+
+            await _context.AddAsync(user);
+            return CreatedAtAction("GetById", new { id = user.Id }, user);
+        }
+        
 
         
     }

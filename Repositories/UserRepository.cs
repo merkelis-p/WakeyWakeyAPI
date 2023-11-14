@@ -14,6 +14,17 @@ namespace WakeyWakeyAPI.Repositories
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
         }
+        
+        public async Task<bool> ExistsAsync(string username)
+        {
+            return await _context.Users.AnyAsync(u => u.Username == username);
+        }
+        
+        // Exists Email
+        public async Task<bool> ExistsEmailAsync(string email)
+        {
+            return await _context.Users.AnyAsync(u => u.Email == email);
+        }
 
     }
 
