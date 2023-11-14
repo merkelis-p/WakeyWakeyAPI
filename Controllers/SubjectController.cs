@@ -30,7 +30,7 @@ namespace WakeyWakeyAPI.Controllers
             return Ok(subjects);
         }
 
-        
+
 
     }
 }
