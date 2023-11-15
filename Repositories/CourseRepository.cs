@@ -24,33 +24,47 @@ namespace WakeyWakeyAPI.Repositories
         
         
         // Get all hierarchy
-        public async Task<Course> GetAllHierarchyAsync(int id)
+        public async Task<Course> GetAllHierarchyAsync(int userId)
         {
-            var course = await _context.Courses.FirstOrDefaultAsync(c => c.UserId == id);
-            var subjects = await _context.Subjects.ToListAsync();
-            var tasks = await _context.Tasks.ToListAsync();
-            course.Subjects = subjects.FindAll(s => s.CourseId == course.Id);
-            foreach (var subject in course.Subjects)
+            // Use eager loading to include related subjects and their tasks
+            var course = await _context.Courses
+                .Where(c => c.UserId == userId)
+                .Include(c => c.Subjects)
+                .ThenInclude(s => s.Tasks.Where(t => t.ParentId == null))
+                .AsNoTracking() // Use AsNoTracking if you're only reading data for better performance
+                .FirstOrDefaultAsync();
+
+            // Now load subtasks for each task
+            if (course != null)
             {
-                subject.Tasks = await _context.Tasks.Where(t => t.SubjectId == subject.Id && t.ParentId == null).ToListAsync();
-                // recursive way to get all subtasks
-                foreach (var task in subject.Tasks)
+                foreach (var subject in course.Subjects)
                 {
-                    task.SubTasks = GetSubTasks(task.Id, tasks);
+                    foreach (var task in subject.Tasks)
+                    {
+                        // Recursively load subtasks
+                        task.SubTasks = await GetSubTasksAsync(task.Id);
+                    }
                 }
-                
             }
+
             return course;
         }
 
-        private ICollection<Task> GetSubTasks(int taskId, List<Task> tasks)
+        private async Task<ICollection<Task>> GetSubTasksAsync(int taskId)
         {
-            var subTasks = tasks.Where(t => t.ParentId == taskId).ToList();
+            var subTasks = await _context.Tasks
+                .Where(t => t.ParentId == taskId)
+                .ToListAsync();
+
             foreach (var subTask in subTasks)
             {
-                subTask.SubTasks = GetSubTasks(subTask.Id, tasks);
+                // Recursively load subtasks
+                subTask.SubTasks = await GetSubTasksAsync(subTask.Id);
             }
+
             return subTasks;
         }
+
+        
     }
 }
