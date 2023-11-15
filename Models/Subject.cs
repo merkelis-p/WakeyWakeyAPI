@@ -27,7 +27,7 @@ namespace WakeyWakeyAPI.Models {
 
             [ForeignKey("Course")]
             public int CourseId { get; set; }
-            public virtual Course Course { get; set; }
+            public virtual Course? Course { get; set; }
 
             public virtual ICollection<Task>? Tasks { get; set; }
     }
