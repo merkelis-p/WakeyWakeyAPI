@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using WakeyWakeyAPI.Models;
 using WakeyWakeyAPI.Controllers;
 using WakeyWakeyAPI.Repositories;
+
+
 
 namespace WakeyWakeyAPI
 {
@@ -34,6 +37,15 @@ namespace WakeyWakeyAPI
             services.AddDbContextPool<wakeyContext>(options => options
                 .UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 21)))
             );
+            
+
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    // Configure Newtonsoft.Json to handle circular references correctly.
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
+                    options.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All;
+                });
 
                         
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
