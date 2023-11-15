@@ -7,6 +7,11 @@
 
         public partial class Task
         {
+            
+            public Task()
+            {
+                SubTasks = new HashSet<Task>();
+            }
             [Key]
             public int Id { get; set; }
 
@@ -16,18 +21,18 @@
 
             [ForeignKey("Subject")]
             public int? SubjectId { get; set; }
-            public virtual Subject Subject { get; set; }
+            public virtual Subject? Subject { get; set; }
 
             [ForeignKey("User")]
             public int UserId { get; set; }
-            public virtual User User { get; set; }
+            public virtual User? User { get; set; }
 
             [Required]
             [MaxLength(255)]
             public string Name { get; set; }
 
             [MaxLength(5000)]
-            public string Description { get; set; }
+            public string? Description { get; set; }
 
             public int? EstimatedDuration { get; set; }
             public int? OverallDuration { get; set; }
@@ -37,8 +42,14 @@
 
             [Required]
             public int Status { get; set; }
+            
+            // Navigation property for the parent task
+            public Task? ParentTask { get; set; }
 
-            public virtual ICollection<Record> Records { get; set; }
+            // Collection of subtasks
+            public ICollection<Task>? SubTasks { get; set; }
+
+            public virtual ICollection<Record>? Records { get; set; }
         }
 
     }

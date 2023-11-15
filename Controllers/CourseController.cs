@@ -26,6 +26,19 @@ namespace WakeyWakeyAPI.Controllers
 
             return course;
         }
+        
+        // get all hierarchy
+        [HttpGet("GetAllHierarchy/{id}")]
+        public async Task<ActionResult<Course>> GetAllHierarchy(int id)
+        {
+            var course = await _context.GetAllHierarchyAsync(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return course;
+        }
 
     }
 }

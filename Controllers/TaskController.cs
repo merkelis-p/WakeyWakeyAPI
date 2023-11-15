@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WakeyWakeyAPI.Repositories;
@@ -58,6 +59,38 @@ namespace WakeyWakeyAPI.Controllers
             return task;
 
         }
+        
+        // Get tasks with hierarchy and where user id is equal to the given id
+        [HttpGet("GetTasksWithHierarchyByUserId/{id}")]
+        public async Task<ActionResult<IEnumerable<Task>>> GetTasksWithHierarchyByUserId(int id)
+        {
+
+            var tasks = await _context.GetTasksWithHierarchyByUserId(id);
+            if (tasks == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(tasks);
+
+        }
+        
+        // Get tasks with hierarchy
+        [HttpGet("GetTasksWithHierarchy")]
+        public async Task<ActionResult<IEnumerable<Task>>> GetTasksWithHierarchy()
+        {
+
+            var tasks = await _context.GetTasksWithHierarchy();
+            if (tasks == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(tasks);
+
+        }
+        
+
 
     }
 }
