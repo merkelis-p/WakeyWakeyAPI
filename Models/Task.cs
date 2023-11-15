@@ -43,8 +43,6 @@
             [Required]
             public int Status { get; set; }
             
-            // Navigation property for the parent task
-            public Task? ParentTask { get; set; }
 
             // Collection of subtasks
             public ICollection<Task>? SubTasks { get; set; }
