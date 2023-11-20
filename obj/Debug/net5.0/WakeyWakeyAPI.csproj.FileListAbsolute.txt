@@ -95,3 +95,7 @@
 /home/pame7435/WakeyWakeyAPI/obj/Debug/net5.0/ref/WakeyWakeyAPI.dll
 /home/pame7435/WakeyWakeyAPI/obj/Debug/net5.0/WakeyWakeyAPI.pdb
 /home/pame7435/WakeyWakeyAPI/obj/Debug/net5.0/WakeyWakeyAPI.genruntimeconfig.cache
+/home/pame7435/WakeyWakeyAPI/bin/Debug/net5.0/Microsoft.AspNetCore.JsonPatch.dll
+/home/pame7435/WakeyWakeyAPI/bin/Debug/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/home/pame7435/WakeyWakeyAPI/bin/Debug/net5.0/Newtonsoft.Json.dll
+/home/pame7435/WakeyWakeyAPI/bin/Debug/net5.0/Newtonsoft.Json.Bson.dll
