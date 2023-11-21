@@ -53,6 +53,7 @@ namespace WakeyWakeyAPI.Controllers
             {
                 Username = registerRequest.Username,
                 Salt = Convert.ToBase64String(hmac.Key),
+                Email = registerRequest.Email,
                 Password = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(registerRequest.Password)))
             };
 
