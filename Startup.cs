@@ -42,10 +42,10 @@ namespace WakeyWakeyAPI
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
                 {
-                    // Configure Newtonsoft.Json to handle circular references correctly.
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
-                    options.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All;
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    options.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
                 });
+
 
                         
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
