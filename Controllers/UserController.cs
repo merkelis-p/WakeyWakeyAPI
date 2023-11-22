@@ -58,8 +58,7 @@ namespace WakeyWakeyAPI.Controllers
             };
 
             await _context.AddAsync(user);
-            return Ok("User registered successfully.");
-            
+            return CreatedAtAction("GetById", new { id = user.Id }, user);
         }
         
 
