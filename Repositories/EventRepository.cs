@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using WakeyWakeyAPI.Models;
 using Microsoft.Extensions.Logging;
 
@@ -9,5 +11,12 @@ namespace WakeyWakeyAPI.Repositories
         {
             
         } 
+        
+        // Get by user id
+        public async Task<Event> GetByUserIdAsync(int id)
+        {
+            return await _context.Events.FirstOrDefaultAsync(c => c.UserId == id);
+        }
+        
     }
 }
