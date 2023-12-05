@@ -335,10 +335,10 @@ namespace WakeyWakeyAPI.Models
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("task_ibfk_2");
                 
-                entity.HasOne(t => t.ParentTask) // The navigation property for the parent task
-                    .WithMany(p => p.SubTasks) // The collection property for child tasks
-                    .HasForeignKey(t => t.ParentId) // Specify 'ParentId' as the foreign key
-                    .OnDelete(DeleteBehavior.ClientSetNull); // Configure the delete behavior as needed
+                entity.HasOne(t => t.ParentTask)
+                    .WithMany(p => p.SubTasks) 
+                    .HasForeignKey(t => t.ParentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
 
             });
 

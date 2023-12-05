@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WakeyWakeyAPI", "WakeyWakeyAPI.csproj", "{36497AA0-0F1C-406A-8DD4-A1A663615938}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WakeyWakeyAPI.Tests", "WakeyWakeyAPI.Tests\WakeyWakeyAPI.Tests.csproj", "{AC55BA4A-FB41-410E-BCF0-01DE3E0861FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{36497AA0-0F1C-406A-8DD4-A1A663615938}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36497AA0-0F1C-406A-8DD4-A1A663615938}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36497AA0-0F1C-406A-8DD4-A1A663615938}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC55BA4A-FB41-410E-BCF0-01DE3E0861FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC55BA4A-FB41-410E-BCF0-01DE3E0861FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC55BA4A-FB41-410E-BCF0-01DE3E0861FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC55BA4A-FB41-410E-BCF0-01DE3E0861FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
