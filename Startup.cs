@@ -7,9 +7,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using WakeyWakeyAPI.Models;
 using WakeyWakeyAPI.Controllers;
 using WakeyWakeyAPI.Repositories;
+using WakeyWakeyAPI.Middleware;
+using WakeyWakeyAPI.Interceptors;
+
 
 
 
@@ -31,13 +35,20 @@ namespace WakeyWakeyAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WakeyWakeyAPI", Version = "v1" });
             });
 
-            
             services.AddControllers();
+            services.AddScoped<MyDbCommandInterceptor>();
 
-            services.AddDbContextPool<wakeyContext>(options => options
-                .UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 21)))
-            );
-            
+            services.AddSingleton<MyDbCommandInterceptor>();
+
+            services.AddDbContext<wakeyContext>(options =>
+            {
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 21)));
+                var interceptor = services.BuildServiceProvider().GetRequiredService<MyDbCommandInterceptor>();
+                options.AddInterceptors(interceptor);
+            }); 
+
+
+
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
@@ -45,7 +56,6 @@ namespace WakeyWakeyAPI
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                     options.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
                 });
-
 
                         
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -96,10 +106,15 @@ namespace WakeyWakeyAPI
 
             // app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseMiddleware<LoggingMiddleware>();
+            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+
         }
     }
 }

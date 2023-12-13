@@ -15,39 +15,34 @@ namespace WakeyWakeyAPI.Repositories
         {
 
         }
-        
-        // Get by user id
-        public async Task<Course> GetByUserIdAsync(int id)
+
+        public async Task<List<Course>> GetByUserIdAsync(int id)
         {
-            return await _context.Courses.FirstOrDefaultAsync(c => c.UserId == id);
+            return await _context.Courses.Where(c => c.UserId == id).ToListAsync();
+            
         }
         
-        
-        // Get all hierarchy
-        public async Task<Course> GetAllHierarchyAsync(int userId)
+        public async Task<List<Course>> GetAllHierarchyAsync(int userId)
         {
-            // Use eager loading to include related subjects and their tasks
-            var course = await _context.Courses
+            var courses = await _context.Courses
                 .Where(c => c.UserId == userId)
                 .Include(c => c.Subjects)
                 .ThenInclude(s => s.Tasks.Where(t => t.ParentId == null))
-                .AsNoTracking() // Use AsNoTracking if you're only reading data for better performance
-                .FirstOrDefaultAsync();
+                .AsNoTracking()
+                .ToListAsync();
 
-            // Now load subtasks for each task
-            if (course != null)
+            foreach (var course in courses)
             {
                 foreach (var subject in course.Subjects)
                 {
                     foreach (var task in subject.Tasks)
                     {
-                        // Recursively load subtasks
                         task.SubTasks = await GetSubTasksAsync(task.Id);
                     }
                 }
             }
 
-            return course;
+            return courses;
         }
 
         private async Task<ICollection<Task>> GetSubTasksAsync(int taskId)
@@ -58,7 +53,6 @@ namespace WakeyWakeyAPI.Repositories
 
             foreach (var subTask in subTasks)
             {
-                // Recursively load subtasks
                 subTask.SubTasks = await GetSubTasksAsync(subTask.Id);
             }
 

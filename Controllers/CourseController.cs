@@ -3,6 +3,8 @@ using WakeyWakeyAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WakeyWakeyAPI.Controllers
 {
@@ -16,29 +18,29 @@ namespace WakeyWakeyAPI.Controllers
         
         // Get by user id
         [HttpGet("GetByUserId/{id}")]
-        public async Task<ActionResult<Course>> GetByUserId(int id)
+        public async Task<ActionResult<List<Course>>> GetByUserId(int id)
         {
-            var course = await _context.GetByUserIdAsync(id);
-            if (course == null)
+            var courses = await _context.GetByUserIdAsync(id);
+            if (courses == null || !courses.Any())
             {
                 return NotFound();
             }
 
-            return course;
+            return Ok(courses);
         }
         
         // get all hierarchy
         [HttpGet("GetAllHierarchy/{id}")]
-        public async Task<ActionResult<Course>> GetAllHierarchy(int id)
+        public async Task<ActionResult<List<Course>>> GetAllHierarchy(int id)
         {
-            var course = await _context.GetAllHierarchyAsync(id);
-            if (course == null)
+            var courses = await _context.GetAllHierarchyAsync(id);
+            if (courses == null || !courses.Any())
             {
                 return NotFound();
             }
 
-            return course;
+            return Ok(courses);
         }
-
     }
+
 }
