@@ -9,21 +9,20 @@ using WakeyWakeyAPI.Models;
 namespace WakeyWakeyAPI.Migrations
 {
     [DbContext(typeof(wakeyContext))]
-    [Migration("20231206003336_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20231215010846_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasCharSet("utf8mb4")
-                .UseCollation("utf8mb4_general_ci")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.17");
 
             modelBuilder.Entity("WakeyWakeyAPI.Models.Course", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int(11)")
                         .HasColumnName("id");
 
@@ -68,6 +67,7 @@ namespace WakeyWakeyAPI.Migrations
             modelBuilder.Entity("WakeyWakeyAPI.Models.Event", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int(11)")
                         .HasColumnName("id");
 
@@ -114,63 +114,52 @@ namespace WakeyWakeyAPI.Migrations
             modelBuilder.Entity("WakeyWakeyAPI.Models.Record", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int(11)")
-                        .HasColumnName("id");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<int?>("BreakDuration")
-                        .HasColumnType("int(11)")
-                        .HasColumnName("break_duration");
+                        .HasColumnType("int");
 
                     b.Property<int?>("BreakFrequency")
-                        .HasColumnType("int(11)")
-                        .HasColumnName("break_frequency");
+                        .HasColumnType("int");
 
                     b.Property<int>("Category")
-                        .HasColumnType("int(11)")
-                        .HasColumnName("category");
+                        .HasColumnType("int");
 
                     b.Property<int?>("Duration")
-                        .HasColumnType("int(11)")
-                        .HasColumnName("duration");
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime")
-                        .HasColumnName("end_date");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int?>("FocusDuration")
-                        .HasColumnType("int(11)")
-                        .HasColumnName("focus_duration");
+                        .HasColumnType("int");
 
                     b.Property<string>("Note")
-                        .HasMaxLength(5000)
-                        .HasColumnType("varchar(5000)")
-                        .HasColumnName("note");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime")
-                        .HasColumnName("start_date");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int?>("TaskId")
-                        .HasColumnType("int(11)")
-                        .HasColumnName("task_id");
+                        .HasColumnType("int(11)");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int(11)")
-                        .HasColumnName("user_id");
+                        .HasColumnType("int(11)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "TaskId" }, "task_id");
+                    b.HasIndex("TaskId");
 
-                    b.HasIndex(new[] { "UserId" }, "user_id")
-                        .HasDatabaseName("user_id2");
+                    b.HasIndex("UserId");
 
-                    b.ToTable("record");
+                    b.ToTable("Records");
                 });
 
             modelBuilder.Entity("WakeyWakeyAPI.Models.Reminder", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int(11)")
                         .HasColumnName("id");
 
@@ -192,6 +181,7 @@ namespace WakeyWakeyAPI.Migrations
             modelBuilder.Entity("WakeyWakeyAPI.Models.Subject", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int(11)")
                         .HasColumnName("id");
 
@@ -240,6 +230,7 @@ namespace WakeyWakeyAPI.Migrations
             modelBuilder.Entity("WakeyWakeyAPI.Models.Task", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int(11)")
                         .HasColumnName("id");
 
@@ -274,6 +265,9 @@ namespace WakeyWakeyAPI.Migrations
                         .HasColumnType("int(11)")
                         .HasColumnName("parent_id");
 
+                    b.Property<int?>("ParentTaskId")
+                        .HasColumnType("int(11)");
+
                     b.Property<int?>("Score")
                         .HasColumnType("int(11)")
                         .HasColumnName("score");
@@ -296,12 +290,12 @@ namespace WakeyWakeyAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentId");
+                    b.HasIndex("ParentTaskId");
 
                     b.HasIndex(new[] { "SubjectId" }, "subject_id");
 
                     b.HasIndex(new[] { "UserId" }, "user_id")
-                        .HasDatabaseName("user_id3");
+                        .HasDatabaseName("user_id2");
 
                     b.ToTable("task");
                 });
@@ -309,6 +303,7 @@ namespace WakeyWakeyAPI.Migrations
             modelBuilder.Entity("WakeyWakeyAPI.Models.User", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int(11)")
                         .HasColumnName("id");
 
@@ -326,7 +321,8 @@ namespace WakeyWakeyAPI.Migrations
 
                     b.Property<string>("Salt")
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("salt");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -365,13 +361,12 @@ namespace WakeyWakeyAPI.Migrations
                 {
                     b.HasOne("WakeyWakeyAPI.Models.Task", "Task")
                         .WithMany("Records")
-                        .HasForeignKey("TaskId")
-                        .HasConstraintName("record_ibfk_1");
+                        .HasForeignKey("TaskId");
 
                     b.HasOne("WakeyWakeyAPI.Models.User", "User")
                         .WithMany("Records")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("record_ibfk_2")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Task");
@@ -405,7 +400,7 @@ namespace WakeyWakeyAPI.Migrations
                 {
                     b.HasOne("WakeyWakeyAPI.Models.Task", "ParentTask")
                         .WithMany("SubTasks")
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("ParentTaskId");
 
                     b.HasOne("WakeyWakeyAPI.Models.Subject", "Subject")
                         .WithMany("Tasks")

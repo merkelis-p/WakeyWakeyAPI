@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/home/pame7435/WakeyWakeyAPI/WakeyWakeyAPI.csproj": {}
+    "/Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/SSE/Wakey/WakeyWakeyAPI/WakeyWakeyAPI.csproj": {}
   },
   "projects": {
-    "/home/pame7435/WakeyWakeyAPI/WakeyWakeyAPI.csproj": {
+    "/Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/SSE/Wakey/WakeyWakeyAPI/WakeyWakeyAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/pame7435/WakeyWakeyAPI/WakeyWakeyAPI.csproj",
+        "projectUniqueName": "/Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/SSE/Wakey/WakeyWakeyAPI/WakeyWakeyAPI.csproj",
         "projectName": "WakeyWakeyAPI",
-        "projectPath": "/home/pame7435/WakeyWakeyAPI/WakeyWakeyAPI.csproj",
-        "packagesPath": "/home/pame7435/.nuget/packages/",
-        "outputPath": "/home/pame7435/WakeyWakeyAPI/obj/",
+        "projectPath": "/Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/SSE/Wakey/WakeyWakeyAPI/WakeyWakeyAPI.csproj",
+        "packagesPath": "/Users/patrikasm/.nuget/packages/",
+        "outputPath": "/Users/patrikasm/Library/Mobile Documents/com~apple~CloudDocs/VU/SE5/SSE/Wakey/WakeyWakeyAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/pame7435/.nuget/NuGet/NuGet.Config"
+          "/Users/patrikasm/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "/usr/local/share/dotnet/sdk/7.0.309/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -77,10 +79,17 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.osx-x64",
+              "version": "[5.0.17, 5.0.17]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -89,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.408/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.309/RuntimeIdentifierGraph.json"
         }
       }
     }

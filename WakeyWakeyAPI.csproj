@@ -18,4 +18,26 @@
 
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="WakeyWakeyAPI.Tests\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="WakeyWakeyAPI.Tests\obj\project.packagespec.json" />
+    <_ContentIncludedByDefault Remove="WakeyWakeyAPI.Tests\obj\WakeyWakeyAPI.Tests.csproj.nuget.dgspec.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="WakeyWakeyAPI.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="WakeyWakeyAPI.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="WakeyWakeyAPI.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="WakeyWakeyAPI.Tests\**" />
+  </ItemGroup>
+
 </Project>
