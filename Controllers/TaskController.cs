@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WakeyWakeyAPI.Repositories;
@@ -26,7 +27,7 @@ namespace WakeyWakeyAPI.Controllers
                 return NotFound();
             }
 
-            return task;
+            return Ok(task);
             
         }
         
@@ -36,12 +37,12 @@ namespace WakeyWakeyAPI.Controllers
         {
 
             var task = await _context.GetBySubjectIdAsync(id);
-            if (task == null)
+            if (task == null || !task.Any())
             {
                 return NotFound();
             }
 
-            return task;
+            return Ok(task);
 
         }
         
@@ -51,12 +52,12 @@ namespace WakeyWakeyAPI.Controllers
         {
 
             var task = await _context.GetChildrenByParentIdAsync(id);
-            if (task == null)
+            if (task == null || !task.Any())
             {
                 return NotFound();
             }
 
-            return task;
+            return Ok(task);
 
         }
         

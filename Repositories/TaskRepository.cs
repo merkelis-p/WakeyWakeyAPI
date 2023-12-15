@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,21 +17,21 @@ namespace WakeyWakeyAPI.Repositories
         }
         
         // Get by user id
-        public async Task<Task> GetByUserIdAsync(int id)
+        public async Task<IEnumerable<Task>> GetByUserIdAsync(int id)
         {
-            return await _context.Tasks.FirstOrDefaultAsync(t => t.UserId == id);
+            return await _context.Tasks.Where(t => t.UserId == id).ToListAsync();
         }
         
         // Get by subject id
-        public async Task<Task> GetBySubjectIdAsync(int id)
+        public async Task<IEnumerable<Task>> GetBySubjectIdAsync(int id)
         {
-            return await _context.Tasks.FirstOrDefaultAsync(t => t.SubjectId == id);
+            return await _context.Tasks.Where(t => t.SubjectId == id).ToListAsync();
         }
         
         // Get children by parent id
-        public async Task<Task> GetChildrenByParentIdAsync(int id)
+        public async Task<IEnumerable<Task>> GetChildrenByParentIdAsync(int id)
         {
-            return await _context.Tasks.FirstOrDefaultAsync(t => t.ParentId == id);
+            return await _context.Tasks.Where(t => t.ParentId == id).ToListAsync();
         }
         
         // Get tasks with hierarchy and where subject id is equal to null
@@ -127,7 +128,7 @@ namespace WakeyWakeyAPI.Repositories
                 });
         }
 
-        private List<Task> GetSubTasks(int parentId, IEnumerable<Task> allTasks)
+        private IEnumerable<Task> GetSubTasks(int parentId, IEnumerable<Task> allTasks)
         {
             var subTasks = allTasks.Where(task => task.ParentId == parentId).ToList();
             foreach (var subTask in subTasks)

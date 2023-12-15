@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -19,12 +20,12 @@ namespace WakeyWakeyAPI.Controllers
         public async Task<ActionResult<Event>> GetByUserId(int id)
         {
             var ev = await _context.GetByUserIdAsync(id);
-            if (ev == null)
+            if (ev == null || !ev.Any())
             {
                 return NotFound();
             }
 
-            return ev;
+            return Ok(ev);
         }
 
         

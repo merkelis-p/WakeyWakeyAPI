@@ -47,7 +47,7 @@
             public Task? ParentTask { get; set; }
 
             // Collection of subtasks
-            public virtual ICollection<Task>? SubTasks { get; set; }
+            public virtual IEnumerable<Task> SubTasks { get; set; }
 
             public virtual ICollection<Record>? Records { get; set; }
         }
