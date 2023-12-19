@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WakeyWakeyAPI.Models;
 using WakeyWakeyAPI.Repositories;
 using Task = WakeyWakeyAPI.Models.Task;
 
@@ -36,7 +37,7 @@ namespace WakeyWakeyAPI.Controllers
         public async Task<ActionResult<Task>> GetBySubjectId(int id)
         {
 
-            var task = await _context.GetBySubjectIdAsync(id);
+            var task = await _context.GetTasksWithHierarchyBySubjectId(id);
             if (task == null || !task.Any())
             {
                 return NotFound();
@@ -91,7 +92,13 @@ namespace WakeyWakeyAPI.Controllers
 
         }
         
-
+        
+        [HttpPost("CreateTask")]
+        public async Task<ActionResult<Task>> CreateTask(TaskCreateRequest taskCreateRequest)
+        {
+            var task = await _context.AddTaskAsync(taskCreateRequest);
+            return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
+        }
 
     }
 }

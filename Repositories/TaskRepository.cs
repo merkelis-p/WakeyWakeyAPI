@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,10 +10,22 @@ namespace WakeyWakeyAPI.Repositories
 {
     public class TaskRepository : Repository<Task>
     {
+        
+        
+        private readonly ILogger<TaskRepository> _logger;
+        protected readonly wakeyContext _context;
+        private readonly DbSet<Task> _entities;
+        
         public TaskRepository(wakeyContext context, ILogger<TaskRepository> logger) : base(context, logger)
         {
-
+            _logger = logger;
+            _entities = context.Set<Task>();
+            _context = context;
+            
         }
+        
+
+        
         
         // Get by user id
         public async Task<IEnumerable<Task>> GetByUserIdAsync(int id)
@@ -58,7 +69,6 @@ namespace WakeyWakeyAPI.Repositories
         }
         
         
-        // Get tasks with hierarchy and where subject id is equal to the given id
         public async Task<IEnumerable<Task>> GetTasksWithHierarchyBySubjectId(int id)
         {
             var allTasks = await _context.Tasks.ToListAsync();
@@ -139,9 +149,32 @@ namespace WakeyWakeyAPI.Repositories
         }
         
         
+        public async Task<Task> AddTaskAsync(TaskCreateRequest taskCreateRequest)
+        {
+            var task = new Task
+            {
+                Category = taskCreateRequest.Category,
+                ParentId = taskCreateRequest.ParentId,
+                SubjectId = taskCreateRequest.SubjectId,
+                UserId = taskCreateRequest.UserId,
+                Name = taskCreateRequest.Name,
+                Description = taskCreateRequest.Description,
+                EstimatedDuration = taskCreateRequest.EstimatedDuration,
+                OverallDuration = taskCreateRequest.OverallDuration,
+                DeadlineDate = taskCreateRequest.DeadlineDate,
+                Score = taskCreateRequest.Score,
+                ScoreWeight = taskCreateRequest.ScoreWeight,
+                Status = taskCreateRequest.Status
+            };
+
+            _entities.Add(task);
+            await _context.SaveChangesAsync();
+
+            return task;
+        }
         
         
-        
+      
         
 
         
