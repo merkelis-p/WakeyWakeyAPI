@@ -49,15 +49,28 @@ namespace WakeyWakeyAPI.Repositories
             _logger.LogInformation($"Starting update for the {typeof(T).Name} entity.");
             _logger.LogInformation($"Entity Data: {JsonSerializer.Serialize(entity)}");
 
-            foreach (var entityInContext in _context.ChangeTracker.Entries())
-            {
-                entityInContext.State = EntityState.Detached;
-            }
-    
-            _entities.Update(entity);
-            _context.SaveChanges();
+            // Find the existing entity by its key
+            var keyProperty = _context.Model.FindEntityType(typeof(T)).FindPrimaryKey().Properties[0];
+            var keyValue = entity.GetType().GetProperty(keyProperty.Name).GetValue(entity);
+            var existingEntity = _entities.Find(keyValue);
 
-            _logger.LogInformation($"{typeof(T).Name} entity successfully updated.");
+            if (existingEntity != null)
+            {
+                foreach (var entityInContext in _context.ChangeTracker.Entries())
+                {
+                    entityInContext.State = EntityState.Detached;
+                }
+
+                _entities.Update(entity);
+                _context.SaveChanges();
+
+                _logger.LogInformation($"{typeof(T).Name} entity successfully updated.");
+            }
+            else
+            {
+                // Handle the case where the entity does not exist.
+                _logger.LogWarning($"Attempted to update a non-existing {typeof(T).Name} entity.");
+            }
         }
         
         public async System.Threading.Tasks.Task DeleteAsync(int id)
