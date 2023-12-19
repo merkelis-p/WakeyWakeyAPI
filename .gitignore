@@ -1,3 +1,24 @@
+# Main project
+/WakeyWakey/appsettings.json
+/WakeyWakey/bin/
+/WakeyWakey/obj/
+
+appsettings.json
+bin/
+obj/
+
+.appsettings.json
+.bin/
+.obj/
+
+*.appsettings.json
+*.bin/
+*.obj/
+
+# Test project
+/WakeyWakey.Tests/bin/
+/WakeyWakey.Tests/obj/
+
 # .NET MAUI artifacts
 bin/
 obj/
@@ -53,9 +74,6 @@ UserPrefs.xml
 # Ignore Debug files since they are not needed
 WakeyWakey-Debug.json
 
-
-
-
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -74,11 +92,7 @@ bld/
 .vs/WakeyWakey/xs/project-cache/WakeyWakey-Debug-net7.0-ios.json
 .vs/WakeyWakey/xs/project-cache/WakeyWakey-Debug-net7.0-maccatalyst.json
 .vs/WakeyWakey/xs/project-cache/WakeyWakey-Debug-net7.0-android.json
-
-.vs
-/.vs/WakeyWakey/DesignTimeBuild/.dtbcache.v2
-/.vs/WakeyWakey/v17/.futdcache.v2
-/.vs/WakeyWakey/DesignTimeBuild/.dtbcache.v2
-/.vs/WakeyWakey/v17/.futdcache.v2
-
-/WakeyWakey/appsettings.json
+/WakeyWakeyAPI.Tests/obj/Debug/net5.0/WakeyWakeyAPI.Tests.csproj.CoreCompileInputs.cache
+/bin/Debug/net5.0/WakeyWakeyAPI.dll
+/bin/Debug/net5.0/WakeyWakeyAPI.pdb
+/bin/Debug/net5.0/WakeyWakeyAPI.runtimeconfig.dev.json
