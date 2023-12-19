@@ -13,7 +13,7 @@ namespace WakeyWakeyAPI.Tests.RepositoriesTests
     [TestFixture]
     public class CourseRepositoryTests
     {
-        private CourseRepository _repository;
+        private ICourseRepository _repository;
         private wakeyContext _context;
 
         [SetUp]

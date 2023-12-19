@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace WakeyWakeyAPI.Repositories
 {
-    public class EventRepository : Repository<Event>
+    public class EventRepository : Repository<Event>, IEventRepository
     {
         public EventRepository(wakeyContext context, ILogger<EventRepository> logger) : base(context, logger)
         {

@@ -9,7 +9,7 @@ using Task = WakeyWakeyAPI.Models.Task;
 
 namespace WakeyWakeyAPI.Repositories
 {
-    public class CourseRepository : Repository<Course>
+    public class CourseRepository : Repository<Course>, ICourseRepository
     {
         public CourseRepository(wakeyContext context, ILogger<CourseRepository> logger) : base(context, logger)
         {

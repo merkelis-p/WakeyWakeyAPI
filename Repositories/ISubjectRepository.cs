@@ -4,9 +4,9 @@ using WakeyWakeyAPI.Models;
 
 namespace WakeyWakeyAPI.Repositories
 {
-    public interface IEventRepository : IRepository<Event>
+    public interface ISubjectRepository : IRepository<Subject>
     {
-        public  Task<IEnumerable<Event>> GetByUserIdAsync(int id);
+        public Task<IEnumerable<Subject>> GetSubjectsByCourse(int courseId);
 
     }
 }

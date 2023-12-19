@@ -9,11 +9,11 @@ using Task = WakeyWakeyAPI.Models.Task;
 
 namespace WakeyWakeyAPI.Controllers
 {
-    public class TaskController: GenericController<Task, TaskRepository>, ITaskController
+    public class TaskController: GenericController<Task, ITaskRepository>, ITaskController
     {
         
-        TaskRepository _context;
-        public TaskController(TaskRepository context) : base(context)
+        ITaskRepository _context;
+        public TaskController(ITaskRepository context) : base(context)
         {
             _context = context;
         }

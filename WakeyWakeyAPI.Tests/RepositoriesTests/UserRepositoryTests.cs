@@ -10,7 +10,7 @@ namespace WakeyWakeyAPI.Tests.RepositoriesTests
 {
     public class UserRepositoryTests
     {
-        private UserRepository _userRepository;
+        private IUserRepository _userRepository;
         private wakeyContext _context;
 
         [SetUp]

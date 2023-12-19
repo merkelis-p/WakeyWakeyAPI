@@ -14,7 +14,7 @@ namespace WakeyWakeyAPI.Tests.RepositoriesTests
     [TestFixture]
     public class EventRepositoryTests
     {
-        private EventRepository _repository;
+        private IEventRepository _repository;
         private wakeyContext _context;
 
         [SetUp]

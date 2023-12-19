@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Task = WakeyWakeyAPI.Models.Task;
 
 namespace WakeyWakeyAPI.Repositories
 {
-    public class SubjectRepository : Repository<Subject>
+    public class SubjectRepository : Repository<Subject>, ISubjectRepository
     {
         public SubjectRepository(wakeyContext context, ILogger<SubjectRepository> logger) : base(context, logger)
         {
@@ -21,11 +20,6 @@ namespace WakeyWakeyAPI.Repositories
                 .Where(s => s.CourseId == courseId)
                 .ToListAsync();
         }
-        
-        
-        
-        
-        
       
     }
 }
