@@ -9,10 +9,10 @@ using WakeyWakeyAPI.Repositories;
 
 namespace WakeyWakeyAPI.Controllers
 {
-    public class UserController : GenericController<User, UserRepository>
+    public class UserController : GenericController<User, IUserRepository>, IUserController
     {
-        readonly UserRepository _context;
-        public UserController(UserRepository repository) : base(repository)
+        readonly IUserRepository _context;
+        public UserController(IUserRepository repository) : base(repository)
         {
             _context = repository;
         }

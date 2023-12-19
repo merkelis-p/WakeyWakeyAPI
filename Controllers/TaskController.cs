@@ -2,20 +2,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using WakeyWakeyAPI.Models;
 using WakeyWakeyAPI.Repositories;
 using Task = WakeyWakeyAPI.Models.Task;
 
 namespace WakeyWakeyAPI.Controllers
 {
-    public class TaskController: GenericController<Task, TaskRepository>
+    public class TaskController: GenericController<Task, ITaskRepository>, ITaskController
     {
         
-        TaskRepository _context;
-        public TaskController(TaskRepository context) : base(context)
+        ITaskRepository _context;
+        public TaskController(ITaskRepository context) : base(context)
         {
             _context = context;
         }
+        
         
         // Get by user id
         [HttpGet("GetByUserId/{id}")]

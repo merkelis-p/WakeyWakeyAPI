@@ -59,30 +59,66 @@ namespace WakeyWakeyAPI
 
                         
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped(typeof(GenericController<,>), typeof(GenericController<,>));
-            services.AddScoped(typeof(UserRepository), typeof(UserRepository));
-            services.AddScoped(typeof(UserController), typeof(UserController));
-            services.AddScoped(typeof(EventRepository), typeof(EventRepository));
-            services.AddScoped(typeof(EventController), typeof(EventController));
-            services.AddScoped(typeof(ReminderRepository), typeof(ReminderRepository));
-            services.AddScoped(typeof(ReminderController), typeof(ReminderController));
-            services.AddScoped(typeof(CourseRepository), typeof(CourseRepository));
-            services.AddScoped(typeof(CourseController), typeof(CourseController));
-            services.AddScoped(typeof(SubjectRepository), typeof(SubjectRepository));
-            services.AddScoped(typeof(SubjectController), typeof(SubjectController));
-            services.AddScoped(typeof(TaskRepository), typeof(TaskRepository));
-            services.AddScoped(typeof(TaskController), typeof(TaskController));
-            services.AddScoped(typeof(RecordRepository), typeof(RecordRepository));
-            services.AddScoped(typeof(RecordController), typeof(RecordController));
+            
+            services.AddScoped<IGenericController<Task>, TaskController>();
+            services.AddScoped<ITaskController, TaskController>();
+            
+            services.AddScoped<IUserController, UserController>();
+            services.AddScoped<IGenericController<User>, UserController>();
+
+
+            services.AddScoped<ISubjectController, SubjectController>();
+            services.AddScoped<IGenericController<Subject>, SubjectController>();
+            
+            services.AddScoped<ICourseController, CourseController>();
+            services.AddScoped<IGenericController<Course>, CourseController>();
+            
+            
+            services.AddScoped<IReminderController, ReminderController>();
+            services.AddScoped<IGenericController<Reminder>, ReminderController>();
+            
+            services.AddScoped<IEventController, EventController>();
+            services.AddScoped<IGenericController<Event>, EventController>();
+            
+            services.AddScoped<IRecordController, RecordController>();
+            services.AddScoped<IGenericController<Record>, RecordController>();
+
+
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IRepository<Models.Task>, TaskRepository>();
+            
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRepository<User>, UserRepository>();
+            
+            services.AddScoped<ISubjectRepository, SubjectRepository>();
+            services.AddScoped<IRepository<Subject>, SubjectRepository>();
+            
+            services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<IRepository<Course>, CourseRepository>();
+            
+            services.AddScoped<IReminderRepository, ReminderRepository>();
+            services.AddScoped<IRepository<Reminder>, ReminderRepository>();
+            
+            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IRepository<Event>, EventRepository>();
+            
+            services.AddScoped<IRecordRepository, RecordRepository>();
+            services.AddScoped<IRepository<Record>, RecordRepository>();
+            
+            
+            
+            
+            
+            // services.AddScoped(typeof(UserRepository), typeof(UserRepository));
+            // services.AddScoped(typeof(EventRepository), typeof(EventRepository));
+            // services.AddScoped(typeof(ReminderRepository), typeof(ReminderRepository));
+            // services.AddScoped(typeof(CourseRepository), typeof(CourseRepository));
+            // services.AddScoped(typeof(SubjectRepository), typeof(SubjectRepository));
+            // services.AddScoped(typeof(TaskRepository), typeof(TaskRepository));
+            // services.AddScoped(typeof(RecordRepository), typeof(RecordRepository));
 
     
-            //services.AddScoped<UserController>();
-            // services.AddScoped<EventController>();
-            // services.AddScoped<ReminderController>();
-            // services.AddScoped<CourseController>();
-            // services.AddScoped<SubjectController>();
-            // services.AddScoped<TaskController>();
-            // services.AddScoped<RecordController>();
+        
 
 
             services.AddCors(options =>

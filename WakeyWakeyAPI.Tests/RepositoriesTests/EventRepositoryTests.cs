@@ -14,7 +14,7 @@ namespace WakeyWakeyAPI.Tests.RepositoriesTests
     [TestFixture]
     public class EventRepositoryTests
     {
-        private EventRepository _repository;
+        private IEventRepository _repository;
         private wakeyContext _context;
 
         [SetUp]
@@ -26,12 +26,15 @@ namespace WakeyWakeyAPI.Tests.RepositoriesTests
 
             _context = new wakeyContext(options);
             _repository = new EventRepository(_context, new Mock<ILogger<EventRepository>>().Object);
+            
 
             // Adding an event with a known ID
             var testEvent = new Event { Id = 100, Name = "Sample Event", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1), UserId = 1 };
             _context.Events.Add(testEvent);
             _context.SaveChanges();
         }
+        
+
 
         [Test]
         public async Task GetByIdAsync_ReturnsCorrectEvent()
@@ -129,10 +132,12 @@ namespace WakeyWakeyAPI.Tests.RepositoriesTests
         {
             // Arrange
             var userId = 1;
+            // Clear existing data and add specific test data for this test
+            _context.Events.RemoveRange(_context.Events);
             _context.Events.AddRange(
-                new Event { Id = 7, UserId = userId, Name = "User Event 1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1) },
-                new Event { Id = 8, UserId = userId, Name = "User Event 2", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1) },
-                new Event { Id = 9, UserId = 2, Name = "Other User Event", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1) }
+                new Event { Id = 101, UserId = userId, Name = "User Event 1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1) },
+                new Event { Id = 102, UserId = userId, Name = "User Event 2", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1) },
+                new Event { Id = 103, UserId = 2, Name = "Other User Event", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1) }
             );
             await _context.SaveChangesAsync();
 
@@ -140,7 +145,44 @@ namespace WakeyWakeyAPI.Tests.RepositoriesTests
             var result = await _repository.GetByUserIdAsync(userId);
 
             // Assert
-            Assert.AreEqual(2, result.Count());
+            Assert.AreEqual(2, result.Count()); // Should find only 2 events for userId = 1
         }
+        
+        
+
+        [Test]
+        public void Event_Properties_CanBeSetAndGet()
+        {
+            // Arrange
+            var eventModel = new Event();
+            var startDate = DateTime.Now;
+            var endDate = DateTime.Now.AddDays(1);
+            var userId = 1;
+            var eventName = "Test Event";
+            var description = "Test Description";
+            var location = "Test Location";
+
+            // Act
+            eventModel.Id = 100;
+            eventModel.StartDate = startDate;
+            eventModel.EndDate = endDate;
+            eventModel.UserId = userId;
+            eventModel.Name = eventName;
+            eventModel.Description = description;
+            eventModel.Location = location;
+
+            // Assert
+            Assert.AreEqual(100, eventModel.Id);
+            Assert.AreEqual(startDate, eventModel.StartDate);
+            Assert.AreEqual(endDate, eventModel.EndDate);
+            Assert.AreEqual(userId, eventModel.UserId);
+            Assert.AreEqual(eventName, eventModel.Name);
+            Assert.AreEqual(description, eventModel.Description);
+            Assert.AreEqual(location, eventModel.Location);
+        }
+
+       
+
+
     }
 }

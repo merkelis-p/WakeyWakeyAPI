@@ -23,7 +23,7 @@ namespace WakeyWakeyAPI.Repositories
         }
 
 
-        public async System.Threading.Tasks.Task<IEnumerable<T>> GetAllAsync()
+        public virtual async System.Threading.Tasks.Task<IEnumerable<T>> GetAllAsync()
         {
             return await _entities.ToListAsync();
         }

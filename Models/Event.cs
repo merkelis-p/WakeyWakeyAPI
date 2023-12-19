@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -31,6 +32,6 @@ namespace WakeyWakeyAPI.Models
         public int UserId { get; set; }
         public virtual User? User { get; set; }
 
-        public virtual ICollection<Reminder>? Reminders { get; set; }
+        public virtual IEnumerable<Reminder> Reminders { get; set; }
     }
 }

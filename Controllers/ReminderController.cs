@@ -3,11 +3,11 @@ using WakeyWakeyAPI.Repositories;
 
 namespace WakeyWakeyAPI.Controllers
 {
-    public class ReminderController : GenericController<Reminder, ReminderRepository>
+    public class ReminderController : GenericController<Reminder, IReminderRepository>, IReminderController
     {
-        ReminderRepository _context;
+        IReminderRepository _context;
 
-        public ReminderController(ReminderRepository context) : base(context)
+        public ReminderController(IReminderRepository context) : base(context)
         {
             _context = context;
             

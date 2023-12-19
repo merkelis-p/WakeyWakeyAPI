@@ -9,7 +9,7 @@ using Task = WakeyWakeyAPI.Models.Task;
 
 namespace WakeyWakeyAPI.Repositories
 {
-    public class CourseRepository : Repository<Course>
+    public class CourseRepository : Repository<Course>, ICourseRepository
     {
         public CourseRepository(wakeyContext context, ILogger<CourseRepository> logger) : base(context, logger)
         {
@@ -45,7 +45,7 @@ namespace WakeyWakeyAPI.Repositories
             return courses;
         }
 
-        private async Task<ICollection<Task>> GetSubTasksAsync(int taskId)
+        public async Task<ICollection<Task>> GetSubTasksAsync(int taskId)
         {
             var subTasks = await _context.Tasks
                 .Where(t => t.ParentId == taskId)

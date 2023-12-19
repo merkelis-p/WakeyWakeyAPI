@@ -8,7 +8,7 @@ using Task = WakeyWakeyAPI.Models.Task;
 
 namespace WakeyWakeyAPI.Repositories
 {
-    public class TaskRepository : Repository<Task>
+    public class TaskRepository : Repository<Task>, ITaskRepository
     {
         
         
@@ -23,8 +23,6 @@ namespace WakeyWakeyAPI.Repositories
             _context = context;
             
         }
-        
-
         
         
         // Get by user id
@@ -138,7 +136,8 @@ namespace WakeyWakeyAPI.Repositories
                 });
         }
 
-        private IEnumerable<Task> GetSubTasks(int parentId, IEnumerable<Task> allTasks)
+
+        public IEnumerable<Task> GetSubTasks(int parentId, IEnumerable<Task> allTasks)
         {
             var subTasks = allTasks.Where(task => task.ParentId == parentId).ToList();
             foreach (var subTask in subTasks)
@@ -173,8 +172,7 @@ namespace WakeyWakeyAPI.Repositories
             return task;
         }
         
-        
-      
+     
         
 
         

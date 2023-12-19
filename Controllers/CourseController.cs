@@ -10,10 +10,10 @@ using System.Linq;
 namespace WakeyWakeyAPI.Controllers
 {
     
-    public class CourseController : GenericController<Course, CourseRepository>
+    public class CourseController : GenericController<Course, ICourseRepository>, ICourseController
     {
-        CourseRepository _context;
-        public CourseController(CourseRepository context) : base(context)
+        ICourseRepository _context;
+        public CourseController(ICourseRepository context) : base(context)
         {
             _context = context;
         }

@@ -18,7 +18,7 @@ namespace WakeyWakeyAPI.Tests.RepositoriesTests
     [TestFixture]
     public class TaskRepositoryTests
     {
-        private TaskRepository _repository;
+        private ITaskRepository _repository;
         private wakeyContext _context;
 
         [SetUp]

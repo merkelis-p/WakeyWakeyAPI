@@ -3,11 +3,11 @@ using WakeyWakeyAPI.Repositories;
 
 namespace WakeyWakeyAPI.Controllers
 {
-    public class RecordController : GenericController<Record, RecordRepository>
+    public class RecordController : GenericController<Record, IRecordRepository>, IRecordController
     {
         
-        RecordRepository _context;
-        public RecordController(RecordRepository context) : base(context)
+        IRecordRepository _context;
+        public RecordController(IRecordRepository context) : base(context)
         {
             
             _context = context;

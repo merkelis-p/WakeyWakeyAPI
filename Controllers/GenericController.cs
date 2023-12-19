@@ -7,7 +7,7 @@ namespace WakeyWakeyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GenericController<T, R> : ControllerBase 
+    public class GenericController<T, R> : ControllerBase, IGenericController<T>
         where T : class 
         where R : IRepository<T>
     {

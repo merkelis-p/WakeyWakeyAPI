@@ -4,6 +4,12 @@
     &lt;ProjectFile&gt;AC55BA4A-FB41-410E-BCF0-01DE3E0861FE/f:UnitTest1.cs&lt;/ProjectFile&gt;
     &lt;TestAncestor&gt;
       &lt;TestId&gt;NUnit3x::AC55BA4A-FB41-410E-BCF0-01DE3E0861FE::net5.0::WakeyWakeyAPI.Tests.RepositoriesTests.TaskRepositoryTests.GetByIdAsync_ReturnsCorrectTask&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::AC55BA4A-FB41-410E-BCF0-01DE3E0861FE::net5.0::WakeyWakeyAPI.Tests.RepositoriesTests.RecordRepositoryTests&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::AC55BA4A-FB41-410E-BCF0-01DE3E0861FE::net5.0::WakeyWakeyAPI.Tests.RepositoriesTests.EventRepositoryTests&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::AC55BA4A-FB41-410E-BCF0-01DE3E0861FE::net5.0::WakeyWakeyAPI.Tests.RepositoriesTests.SubjectRepositoryTests&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::AC55BA4A-FB41-410E-BCF0-01DE3E0861FE::net5.0::WakeyWakeyAPI.Tests.RepositoriesTests.CourseRepositoryTests&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::AC55BA4A-FB41-410E-BCF0-01DE3E0861FE::net5.0::WakeyWakeyAPI.Tests.RepositoriesTests.UserRepositoryTests&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::AC55BA4A-FB41-410E-BCF0-01DE3E0861FE::net5.0::WakeyWakeyAPI.Tests.ControllersTests.TaskControllerTests&lt;/TestId&gt;
     &lt;/TestAncestor&gt;
     &lt;ProjectFile&gt;AC55BA4A-FB41-410E-BCF0-01DE3E0861FE/d:RepositoriesTests/f:TaskRepositoryTests.cs&lt;/ProjectFile&gt;
   &lt;/Or&gt;

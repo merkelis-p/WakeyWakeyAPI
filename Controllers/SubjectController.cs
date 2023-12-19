@@ -9,11 +9,11 @@ using System.Linq;
 
 namespace WakeyWakeyAPI.Controllers
 {
-    public class SubjectController : GenericController<Subject, SubjectRepository>
+    public class SubjectController : GenericController<Subject, ISubjectRepository>, ISubjectController
     {
         
-        SubjectRepository _context;
-        public SubjectController(SubjectRepository context) : base(context)
+        ISubjectRepository _context;
+        public SubjectController(ISubjectRepository context) : base(context)
         {
             _context = context;
 

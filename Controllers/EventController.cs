@@ -7,10 +7,10 @@ using WakeyWakeyAPI.Repositories;
 
 namespace WakeyWakeyAPI.Controllers
 {
-    public class EventController : GenericController<Event, EventRepository>
+    public class EventController : GenericController<Event, IEventRepository>, IEventController
     {
-        EventRepository _context;
-        public EventController(EventRepository context) : base(context)
+        IEventRepository _context;
+        public EventController(IEventRepository context) : base(context)
         {
             _context = context;
         }

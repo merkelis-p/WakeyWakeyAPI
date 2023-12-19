@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace WakeyWakeyAPI.Repositories
 {
-    public class UserRepository : Repository<User>
+    public class UserRepository : Repository<User>, IUserRepository
     {
         public UserRepository(wakeyContext context, ILogger<UserRepository> logger) : base(context, logger)
         {
