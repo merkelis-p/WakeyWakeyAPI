@@ -1,0 +1,84 @@
+# .NET MAUI artifacts
+bin/
+obj/
+.vs/
+# Uncomment if you wish to ignore the generated platforms folders
+# platforms/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+*.code-workspace
+
+# Rider
+.idea/
+
+# Windows thumbnail cache files
+*.db
+
+# Windows Shell Bag Configuration File
+*.sb
+
+# JetBrains Rider
+*.sln.iml
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# macOS .DS_Store files
+.DS_Store
+
+# macOS thumbnail caches
+._*
+
+# Ignore user preferences
+UserPrefs.xml
+
+# Ignore Debug files since they are not needed
+WakeyWakey-Debug.json
+
+
+
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Specific project cache files
+.vs/WakeyWakey/xs/project-cache/WakeyWakey-Debug-net7.0-ios.json
+.vs/WakeyWakey/xs/project-cache/WakeyWakey-Debug-net7.0-maccatalyst.json
+.vs/WakeyWakey/xs/project-cache/WakeyWakey-Debug-net7.0-android.json
+
+.vs
+/.vs/WakeyWakey/DesignTimeBuild/.dtbcache.v2
+/.vs/WakeyWakey/v17/.futdcache.v2
+/.vs/WakeyWakey/DesignTimeBuild/.dtbcache.v2
+/.vs/WakeyWakey/v17/.futdcache.v2
+
+/WakeyWakey/appsettings.json
