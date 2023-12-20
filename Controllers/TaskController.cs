@@ -19,20 +19,6 @@ namespace WakeyWakeyAPI.Controllers
         }
         
         
-        // Get by user id
-        [HttpGet("GetByUserId/{id}")]
-        public async Task<ActionResult<Task>> GetByUserId(int id)
-        {
-            
-            var task = await _context.GetByUserIdAsync(id);
-            if (task == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(task);
-            
-        }
         
         // Get by subject id
         [HttpGet("GetBySubjectId/{id}")]
@@ -96,8 +82,13 @@ namespace WakeyWakeyAPI.Controllers
         
         
         [HttpPost("CreateTask")]
-        public async Task<ActionResult<Task>> CreateTask(TaskCreateRequest taskCreateRequest)
+        public async Task<ActionResult<Task>> CreateTask(TaskCreateRequest? taskCreateRequest)
         {
+            if (taskCreateRequest == null)
+            {
+                return BadRequest("Task creation request cannot be null.");
+            }
+            
             var task = await _context.AddTaskAsync(taskCreateRequest);
             return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
         }
