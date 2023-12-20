@@ -30,12 +30,18 @@ namespace WakeyWakeyAPI.Controllers
             using var hmac = new HMACSHA512(Convert.FromBase64String(user.Salt));
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginRequest.Password));
 
-            return new LoginValidationResult 
+            if (!computedHash.SequenceEqual(Convert.FromBase64String(user.Password)))
             {
-                IsValid = computedHash.SequenceEqual(Convert.FromBase64String(user.Password)),
+                return Unauthorized(); 
+            }
+
+            return Ok(new LoginValidationResult 
+            {
+                IsValid = true,
                 UserId = user.Id
-            };
+            });
         }
+
         
         
         // POST: api/Users/Register
@@ -61,7 +67,9 @@ namespace WakeyWakeyAPI.Controllers
             return CreatedAtAction("GetById", new { id = user.Id }, user);
         }
         
-
+        
+        
+     
         
     }
 }
